@@ -13,7 +13,11 @@ public:
 	// YOUR CONSTRUCTOR
     ParticleSystem(int i);
 	
+    ParticleSystem();
+
 	int numParticles;
+
+    vector<Vector3f> state;
 
 	// step the system according to your integrator function
 	virtual void stepSystem(float h);
