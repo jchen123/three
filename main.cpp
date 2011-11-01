@@ -28,20 +28,19 @@ namespace
     SimpleSystem *simpleSystem;
 
     // initialize your particle systems
-    void initSystem()
+    void initSystem(char rule, float h)
     {
         // seed the random number generator with the current time
         srand( time( NULL ) );
-        simpleSystem = new SimpleSystem(1);
-		
+
+        simpleSystem = new SimpleSystem(rule, h);
     }
 
     // Take a step forward for the particle shower
     void stepSystem()
     {
         // The stepsize
-        const float h = 0.04f;
-		simpleSystem->stepSystem(h);
+		simpleSystem->stepSystem();
     }
 
     // Draw the current particle positions
@@ -293,9 +292,14 @@ int main( int argc, char* argv[] )
 
     // Initialize OpenGL parameters.
     initRendering();
+    
+    char rule='t';
+    float h=.04;
+    if(argc>=2) rule=argv[1][0];
+    if(argc>=3) h=atof(argv[2]);
 
     // Setup particle system
-    initSystem();
+    initSystem(rule,h);
 
     // Set up callback functions for key presses
     glutKeyboardFunc(keyboardFunc); // Handles "normal" ascii symbols

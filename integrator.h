@@ -11,9 +11,9 @@ using namespace std;
 class Integrator
 {
 public:
-    static vector<Vector3f> Euler(vector<Vector3f> state, vector<Vector3f> force, double h);
+    static void euler(ParticleSystem * p);
 
-    //static vector<Vector3f> Trapezoid(vector<Vector3f> state,vector<Vector3f> force, double h);
+    static void trapezoid(ParticleSystem * p);
 };
 
 

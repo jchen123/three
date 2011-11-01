@@ -11,16 +11,20 @@ class ParticleSystem
 public:
 
 	// YOUR CONSTRUCTOR
-    ParticleSystem(int i);
+    ParticleSystem(char rule, float h);
 	
     ParticleSystem();
 
 	int numParticles;
 
+    char rule;
+
+    float h;
+
     vector<Vector3f> state;
 
 	// step the system according to your integrator function
-	virtual void stepSystem(float h);
+	virtual void stepSystem();
 	
 	// for a given state, evaluate f(X,t)
 	virtual vector<Vector3f> evalF(vector<Vector3f> state) = 0;

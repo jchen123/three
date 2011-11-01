@@ -2,25 +2,24 @@
 
 using namespace std;
 
-vector<Vector3f> Integrator::Euler(vector<Vector3f> state,vector<Vector3f> force, double h)
+void Integrator::euler(ParticleSystem * p)
 {
     vector<Vector3f> newState;
-    for(int i=0; i<state.size();i++)
-    {
-        Vector3f v(state[i][0]+h*force[i][0],state[i][1]+h*force[i][1],state[i][2]+h*force[i][2]);
-        newState.push_back(v);
-    }
-    return newState;
+    vector<Vector3f> f0=p->evalF(p->state);
+    for(int i=0; i<p->state.size();i++)
+        newState.push_back(p->state[i]+p->h*f0[i]);
+    p->setState(newState);
 }
-/*
-//unimplemented
-vector<Vector3f> Integrator::Trapezoid(vector<Vector3f> state,vector<Vector3f> force, double h)
+
+void Integrator::trapezoid(ParticleSystem * p)
 {
     vector<Vector3f> newState;
-    for(int i=0; i<state.size();i++)
-    {
-        Vector3f v(state[i][0]+h*force[i][0],state[i][1]+h*force[i][1],state[i][2]+h*force[i][2]);
-        newState.push_back(v);
-    }
-    return newState;
-}*/
+    vector<Vector3f> f0=p->evalF(p->state);
+    vector<Vector3f> incstate;
+    for(int i=0; i<p->state.size();i++)
+         incstate.push_back(p->state[i]+p->h*f0[i]);
+    vector<Vector3f> f1=p->evalF(incstate);
+    for(int i=0; i<p->state.size();i++)
+        newState.push_back(p->state[i]+.5*p->h*(f0[i]+f1[i]));
+    p->setState(newState);
+}

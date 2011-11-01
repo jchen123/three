@@ -14,7 +14,7 @@ class SimpleSystem: public ParticleSystem
 public:
 	SimpleSystem();
 	
-    SimpleSystem(int i);
+    SimpleSystem(char rule, float h);
 	
     vector<Vector3f> evalF(vector<Vector3f> state);
 	

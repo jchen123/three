@@ -6,16 +6,20 @@ ParticleSystem::ParticleSystem()
      
 }
 
-ParticleSystem::ParticleSystem(int i)
+ParticleSystem::ParticleSystem(char rule, float h)
 {
-     
-
+    this->rule=rule;
+    this->h=h;    
 }
 
 // step the system according to your integrator function
-void ParticleSystem::stepSystem(float h)
+void ParticleSystem::stepSystem()
 {
-    state=Integrator::Euler(state,evalF(state),h);
+    if(this->rule=='t')
+        Integrator::trapezoid(this);
+    else if(this->rule=='e')
+        Integrator::euler(this);
+    else cout<<"dog u got bad parameterz yo"<<endl;
 }
 	
 	// for a given state, evaluate f(X,t)

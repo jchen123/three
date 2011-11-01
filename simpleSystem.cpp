@@ -4,8 +4,10 @@
 
 using namespace std;
 
-SimpleSystem::SimpleSystem(int i)
+SimpleSystem::SimpleSystem(char rule, float h)
 {
+    this->rule=rule;
+    this->h=h;
     state.push_back(Vector3f(0,1,0));
     state.push_back(Vector3f(1,0,0));
 }

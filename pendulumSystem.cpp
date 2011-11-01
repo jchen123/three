@@ -1,7 +1,7 @@
 
 #include "pendulumSystem.h"
 
-PendulumSystem::PendulumSystem(int numParticles):ParticleSystem(numParticles)
+/*PendulumSystem::PendulumSystem(int numParticles):ParticleSystem(numParticles)
 {
 	this->numParticles = numParticles;
 	
@@ -11,7 +11,7 @@ PendulumSystem::PendulumSystem(int numParticles):ParticleSystem(numParticles)
 		// for this system, we care about the position and the velocity
 
 	}
-}
+}*/
 
 
 // TODO: implement evalF
