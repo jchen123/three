@@ -12,6 +12,8 @@ public:
 
 	// YOUR CONSTRUCTOR
     ParticleSystem(char rule, float h);
+    
+    ParticleSystem(char rule, float h, int numParticles);
 	
     ParticleSystem();
 

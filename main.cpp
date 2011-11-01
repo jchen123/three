@@ -9,6 +9,7 @@
 #include "camera.h"
 #include "integrator.h"
 #include "simpleSystem.h"
+#include "pendulumSystem.h"
 
 using namespace std;
 
@@ -25,7 +26,8 @@ float nextFloat()
 namespace
 {
 
-    SimpleSystem *simpleSystem;
+    //SimpleSystem *simpleSystem;
+    PendulumSystem *pendulumSystem;
 
     // initialize your particle systems
     void initSystem(char rule, float h)
@@ -33,14 +35,14 @@ namespace
         // seed the random number generator with the current time
         srand( time( NULL ) );
 
-        simpleSystem = new SimpleSystem(rule, h);
+        pendulumSystem = new PendulumSystem(rule, h);
     }
 
     // Take a step forward for the particle shower
     void stepSystem()
     {
         // The stepsize
-		simpleSystem->stepSystem();
+		pendulumSystem->stepSystem();
     }
 
     // Draw the current particle positions
@@ -55,7 +57,7 @@ namespace
 
         glutSolidSphere(0.1f,10.0f,10.0f);
 
-		simpleSystem->draw();
+		pendulumSystem->draw();
 
 
         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, floorColor);

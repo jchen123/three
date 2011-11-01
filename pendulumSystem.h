@@ -10,10 +10,11 @@
 class PendulumSystem: public ParticleSystem
 {
 public:
-	//PendulumSystem(int numParticles);
+	PendulumSystem(char rule, float h);
 	
 	vector<Vector3f> evalF(vector<Vector3f> state);
-	
+	//adjacency matrix of the particles. the vector3f is distance, stiffness and rest length
+    vector<vector<Vector3f> > adjmat;
 	void draw();
 	
 };
