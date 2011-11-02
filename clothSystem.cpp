@@ -90,16 +90,22 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
     //calculate forces
     for(int i=0; i<state.size();i+=2)
     {
-        f.push_back(state[i+1]);
         //anchors
         if(i/2==0||i/2==w-1)
         {
-            if(!toggle) f.push_back(Vector3f(0,0,0));
-            else if(state[i][2]<=-1*space*w||state[i][2]>=space*w)
+            if(!toggle)
+            {
+                f.push_back(Vector3f(0,0,0));
+                f.push_back(Vector3f(0,0,0));
+                continue;
+            }
+            f.push_back(state[i+1]);
+            if(state[i][2]<=-1*space*w||state[i][2]>=space*w)
                 f.push_back(Vector3f(0,0,-.05));
             else f.push_back(Vector3f(0,0,.05));
             continue;
         }
+        f.push_back(state[i+1]);
         Vector3f forces(0,0,0);
         //gravity
         forces[1]-=m*g;

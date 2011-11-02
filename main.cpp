@@ -107,6 +107,7 @@ namespace
         case 'r':
         {
             clothSystem->toggle=!clothSystem->toggle;
+            cout<<"move toggle is "<<clothSystem->toggle<<endl;
             break;
         }
         default:
