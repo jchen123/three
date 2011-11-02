@@ -1,15 +1,12 @@
 #include "particleSystem.h"
 #include "integrator.h"
 #include <iostream>
-ParticleSystem::ParticleSystem()
-{
-     
-}
 
-ParticleSystem::ParticleSystem(char rule, float h)
+ParticleSystem::ParticleSystem(char rule, float h, int ind)
 {
     this->rule=rule;
-    this->h=h;    
+    this->h=h;
+    this->ind=ind;
 }
 
 // step the system according to your integrator function
@@ -22,7 +19,7 @@ void ParticleSystem::stepSystem()
     else cout<<"dog u got bad parameterz yo"<<endl;
 }
 	
-	// for a given state, evaluate f(X,t)
+// for a given state, evaluate f(X,t)
 vector<Vector3f> ParticleSystem::evalF(vector<Vector3f> state)
 {
      

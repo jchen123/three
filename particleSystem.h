@@ -9,19 +9,17 @@ using namespace std;
 class ParticleSystem
 {
 public:
-
-	// YOUR CONSTRUCTOR
-    ParticleSystem(char rule, float h);
     
-    ParticleSystem(char rule, float h, int numParticles);
-	
-    ParticleSystem();
-
+	// YOUR CONSTRUCTOR
+    ParticleSystem(char rule, float h, int ind);
+    
 	int numParticles;
 
     char rule;
 
     float h;
+
+    int ind;
 
     vector<Vector3f> state;
 

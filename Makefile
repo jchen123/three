@@ -7,7 +7,7 @@ LINKFLAGS += -L /mit/6.837/public/lib -lvecmath
 
 CFLAGS    = -O2 -Wall -ansi
 CC        = g++
-SRCS      = integrator.cpp particleSystem.cpp simpleSystem.cpp pendulumSystem.cpp camera.cpp main.cpp
+SRCS      = integrator.cpp particleSystem.cpp clothSystem.cpp camera.cpp main.cpp
 OBJS      = $(SRCS:.cpp=.o)
 PROG      = a3
 

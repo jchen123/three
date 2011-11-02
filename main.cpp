@@ -8,11 +8,9 @@
 #include <vecmath.h>
 #include "camera.h"
 #include "integrator.h"
-#include "simpleSystem.h"
-#include "pendulumSystem.h"
+#include "clothSystem.h"
 
 using namespace std;
-
 
 // returns a random floating point number in [0,1]
 float nextFloat()
@@ -26,23 +24,22 @@ float nextFloat()
 namespace
 {
 
-    //SimpleSystem *simpleSystem;
-    PendulumSystem *pendulumSystem;
+    ClothSystem *clothSystem;
 
     // initialize your particle systems
-    void initSystem(char rule, float h)
+    void initSystem(char rule, float h, int ind)
     {
         // seed the random number generator with the current time
         srand( time( NULL ) );
 
-        pendulumSystem = new PendulumSystem(rule, h);
+        clothSystem = new ClothSystem(rule, h, ind);
     }
 
     // Take a step forward for the particle shower
     void stepSystem()
     {
         // The stepsize
-		pendulumSystem->stepSystem();
+		clothSystem->stepSystem();
     }
 
     // Draw the current particle positions
@@ -55,9 +52,9 @@ namespace
 
         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, particleColor);
 
-        glutSolidSphere(0.1f,10.0f,10.0f);
+        //glutSolidSphere(0.1f,10.0f,10.0f);
 
-		pendulumSystem->draw();
+		clothSystem->draw();
 
 
         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, floorColor);
@@ -105,6 +102,11 @@ namespace
             Matrix4f eye = Matrix4f::identity();
             camera.SetRotation( eye );
             camera.SetCenter( Vector3f::ZERO );
+            break;
+        }
+        case 'r':
+        {
+            clothSystem->toggle=!clothSystem->toggle;
             break;
         }
         default:
@@ -295,13 +297,18 @@ int main( int argc, char* argv[] )
     // Initialize OpenGL parameters.
     initRendering();
     
+    //defaults
     char rule='t';
-    float h=.04;
+    float h=.02;
+    int i=-1;
+
+    //override with user input
     if(argc>=2) rule=argv[1][0];
     if(argc>=3) h=atof(argv[2]);
+    if(argc>=4) i=atoi(argv[3]);
 
     // Setup particle system
-    initSystem(rule,h);
+    initSystem(rule,h,i);
 
     // Set up callback functions for key presses
     glutKeyboardFunc(keyboardFunc); // Handles "normal" ascii symbols
@@ -320,7 +327,6 @@ int main( int argc, char* argv[] )
     // Trigger timerFunc every 20 msec
     glutTimerFunc(20, timerFunc, 20);
 
-        
     // Start the main loop.  glutMainLoop never returns.
     glutMainLoop();
 
